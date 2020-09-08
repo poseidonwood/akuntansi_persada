@@ -1,0 +1,8 @@
+Tutorial Cara Install SiAP di Localhost :
+
+1. Buat folder akuntansi di htdocs
+2. Copy semua file dalam folder Script ke folder akuntansi yang baru dibuat
+3. Buka phpmyadmin, kemudian buat database akuntansi.
+4. Import database akuntansi.sql yang berada di folder basis data.
+5. Akses browser ke alamat : localhost/akuntansi
+6. Gunakan email : admin@admin.com dan password : 123456
