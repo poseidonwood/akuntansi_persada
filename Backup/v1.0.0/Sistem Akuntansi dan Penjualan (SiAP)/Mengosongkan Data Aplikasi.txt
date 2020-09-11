@@ -1,0 +1,6 @@
+Sebelum memakai Aplikasi SiAP , pastikan anda melakukan format data terlebih dahulu :
+
+1. Masuk ke SiAP
+2. Pilih menu Opsi Umum > Format Data
+3. Lakukan pengosongan data dari atas sampai ke bawah.
+4. Pastikan anda sudah backup database terlebih dahulu

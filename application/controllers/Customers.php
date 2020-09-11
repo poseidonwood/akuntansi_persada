@@ -319,6 +319,8 @@ class Customers extends CI_Controller
 			$data['bank_list'] = $this->Crud_model->fetch_record('mp_banks','status');
 
 			$data['customer_list'] = $this->Crud_model->fetch_payee_record('customer',NULL);
+			// Kategori Tambah Customer DIhalaman Income
+			$data['kategori'] = $this->Crud_model->fetch_record_category('mp_category',NULL);
 			$this->load->view( 'admin_models/add_models/add_customer_payment_model.php',$data);
 		}
 		else if($page_name  == 'edit_customer_payment_model')
@@ -328,11 +330,37 @@ class Customers extends CI_Controller
 
 			$data['customer_list'] = $this->Crud_model->fetch_payee_record('customer',NULL);
 
-			$data['customer_payments'] = $this->Crud_model->fetch_record_by_id('mp_customer_payments',$param );
+			$data['customer_payments'] = $this->Crud_model->fetch_record_by_id('mp_customer_payments',$param);
 			$this->load->view( 'admin_models/edit_models/edit_customer_payment_model.php',$data);
 		}
 
 	}
+
+	// function hapus($args)
+	// {
+
+	// 	// DEFINES LOAD CRUDS_MODEL FORM MODELS FOLDERS
+	// 	$this->load->model('Crud_model');
+	// 	$result = $this->Crud_model->delete_record('mp_customer_payments', $args);
+	// 	if ($result == 1)
+	// 	{
+	// 		$array_msg = array(
+	// 			'msg' => '<i style="color:#fff" class="fa fa-trash-o" aria-hidden="true"></i> Category record removed',
+	// 			'alert' => 'info'
+	// 		);
+	// 		$this->session->set_flashdata('status', $array_msg);
+	// 	}
+	// 	else
+	// 	{
+	// 		$array_msg = array(
+	// 			'msg' => '<i style="color:#c00" class="fa fa-exclamation-triangle" aria-hidden="true"></i> Cannot delete, it may exist in another records',
+	// 			'alert' => 'danger'
+	// 		);
+	// 		$this->session->set_flashdata('status', $array_msg);
+	// 	}
+
+	// 	redirect('customers/payment_list');
+	// }
 
 
 	function upload_csv()
@@ -430,6 +458,7 @@ class Customers extends CI_Controller
 		$this->load->model('Crud_model');
 
 		// DEFINES READ MEDICINE details FORM MEDICINE FORM
+		$kategori = html_escape($this->input->post('kategori'));
 		$customer_id = html_escape($this->input->post('customer_id'));
 		$amount = html_escape($this->input->post('amount'));
 		$method_id = html_escape($this->input->post('payment_id'));
@@ -443,6 +472,7 @@ class Customers extends CI_Controller
 		
 			// ASSIGN THE VALUES OF TEXTBOX TO ASSOCIATIVE ARRAY
 			$args = array(
+				'id_kategori' => $kategori,
 				'customer_id' => $customer_id,
 				'date' => $user_date,
 				'amount' => $amount,
@@ -762,6 +792,7 @@ class Customers extends CI_Controller
 			'Nama Customer',
 			'Jumlah',
 			'Metode',
+			'Kategori',
 			'Tanggal',
 			'Keterangan',
 			'Aksi'
@@ -780,7 +811,9 @@ class Customers extends CI_Controller
 		
 		// DEFINES TO LOAD THE DATA USING GIVEN DATES 
 		$this->load->model('Accounts_model');
-		$data['customer_payment']  = $this->Accounts_model->fetch_record_date('mp_customer_payments', $date1, $date2);
+		$data['customer_payment']  = $this->Accounts_model->fetch_record_datete('mp_customer_payments', $date1, $date2);
+
+		// var_dump($data['customer_payment']); die;
 
 		// DEFINES GO TO MAIN FOLDER FOND INDEX.PHP  AND PASS THE ARRAY OF DATA TO THIS PAGE
 		$this->load->view('main/index.php', $data);

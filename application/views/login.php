@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title> Sistem Akuntansi dan Penjualan | SiAP </title>
-     <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none'">
-    <link rel="icon" type="image/png" sizes="96x96" href="<?php echo base_url();?>assets/img/favicon.png">
+    <title> Akuntansi Keuangan </title>
+    <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none'">
+    <link rel="icon" type="image/png" sizes="96x96" href="<?php echo base_url(); ?>assets/img/favicon.png">
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -26,47 +27,48 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<body class="hold-transition login-page " style="background-image:url('<?php echo base_url(); ?>uploads/systemimgs/bg-login.png'); background-size:cover; position: relative;">
-   <br/><br/><br/><br/> <br/>
-  <div class="col-md-4 col-md-offset-4" style="border:1px solid gray; background: rgba(40, 41, 41, 0.48); padding:10px; border-radius:7px;">
-  <br/><br/>   
+
+<body class="hold-transition login-page " style="background-image:url('<?= base_url('assets/login/'); ?>images/bg-01.jpg'); background-size:cover; position: relative;">
+    <br /><br /><br /><br /> <br />
+    <div class="col-md-4 col-md-offset-4" style="border:1px solid gray; background: rgba(40, 41, 41, 0.48); padding:10px; border-radius:7px;">
+        <br /><br />
         <h3 class="text-center" style="font-family: cursive;">
-            <a href="<?php echo base_url('login'); ?>"> <b style="color:#faffbd;">Sistem Akuntansi dan Penjualan (SiAP) </b></a>
+            <a href="<?php echo base_url('login'); ?>"> <b style="color:#faffbd;">Akuntansi Keuangan </b></a>
         </h3>
         <div class="login-box-body">
-            <p class="login-box-msg" style="color: #fffdfde0;font-size: 18px;">Silahkan masukkan Email dan Kata Sandi untuk melanjutkan</p>
+            <p class="login-box-msg" style="color: #fffdfde0;font-size: 18px;">Masukkan email dan password Anda</p>
             <?php
-                  $attributes = array('id'=>'Customer_form','method'=>'post','class'=>'form-horizontal');
-              ?>
-            <?php echo form_open('login/authentication',$attributes); ?>
-                <div class="form-group has-feedback">
-                    <?php
-                        $data = array('class'=>'form-control input-lg','id'=>'user_email','type'=>'email','name'=>'user_email','value'=>'','placeholder'=>'Alamat Email','reqiured'=>'','AUTOCOMPLETE'=>'OFF');
-                        echo form_input($data);
-                    ?>  
-                </div>
-                <div class="form-group has-feedback">
-                    <?php
-                      $data = array('class'=>'form-control input-lg','id'=>'user_password','type'=>'password','name'=>'user_password','value'=>'','placeholder'=>'Kata Sandi','reqiured'=>'','AUTOCOMPLETE'=>'OFF');
-                      echo form_input($data);
-                    ?>
-                </div>
-                <div class="row">
-                        <?php
-                              $data = array('class'=>'btn btn-primary btn-block btn-outline-secondary','name'=>'btn_submit_signin','value'=>$page_title_model_button_Signin);
+            $attributes = array('id' => 'Customer_form', 'method' => 'post', 'class' => 'form-horizontal');
+            ?>
+            <?php echo form_open('login/authentication', $attributes); ?>
+            <div class="form-group has-feedback">
+                <?php
+                $data = array('class' => 'form-control input-lg', 'id' => 'user_email', 'type' => 'email', 'name' => 'user_email', 'value' => '', 'placeholder' => 'Email Anda', 'reqiured' => '', 'AUTOCOMPLETE' => 'OFF');
+                echo form_input($data);
+                ?>
+            </div>
+            <div class="form-group has-feedback">
+                <?php
+                $data = array('class' => 'form-control input-lg', 'id' => 'user_password', 'type' => 'password', 'name' => 'user_password', 'value' => '', 'placeholder' => 'Password', 'reqiured' => '', 'AUTOCOMPLETE' => 'OFF');
+                echo form_input($data);
+                ?>
+            </div>
+            <div class="row">
+                <?php
+                $data = array('class' => 'btn btn-primary btn-block btn-outline-secondary', 'name' => 'btn_submit_signin', 'value' => $page_title_model_button_Signin);
 
-                              echo form_submit($data);
-                           ?>
-                </div>
-                <?php echo form_close(); ?>
-                 <!-- ForgetModel  -->
-                <?php $this->load->view('admin_models/forget_model'); ?>
-                <!-- ForgetModel ends-->
-                <br />    
-                <a style="color: #eee; font-size: 18px;" href="javascript:void(0)" data-toggle="modal" data-target="#ForgetModel" class="pull-left link-set">Lupa Kata Sandi ?</a>
-              
+                echo form_submit($data);
+                ?>
+            </div>
+            <?php echo form_close(); ?>
+            <!-- ForgetModel  -->
+            <?php $this->load->view('admin_models/forget_model'); ?>
+            <!-- ForgetModel ends-->
+            <br />
+            <a style="color: #eee; font-size: 18px;" href="javascript:void(0)" data-toggle="modal" data-target="#ForgetModel" class="pull-left link-set">Lupa Password ?</a>
+
         </div>
-        <br/><br/> 
+        <br /><br />
     </div>
     <!-- jQuery 2.2.3 -->
     <script src="<?php echo base_url(); ?>assets/plugins/jQuery/jquery-2.2.3.min.js"></script>
@@ -97,14 +99,12 @@
         };
     </script>
     <?php
-     if($this->session->flashdata('status') == "")
-     {
-     }
-     else
-     {
+    if ($this->session->flashdata('status') == "") {
+    } else {
         $message = $this->session->flashdata('status');
-        echo "<script>alertFunc('".$message['alert']."','".$message['msg']."')</script>";
-     }
+        echo "<script>alertFunc('" . $message['alert'] . "','" . $message['msg'] . "')</script>";
+    }
     ?>
 </body>
+
 </html>

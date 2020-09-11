@@ -50,6 +50,15 @@
 						<option value="Cheque" > Cek </option>
 					</select>
 				 </div>
+				 <div class="form-group">
+					<label>Kategori</label>	
+					<select class="form-control input-lg " name="kategori" id="kategori"  style="width: 100%;">
+						<option value="" >-- Pilih Kategori --</option>
+						<?php foreach($kategori as $k) : ?>
+							<option value="<?= $k->id; ?>"><?= $k->category_name; ?></option>
+						<?php endforeach; ?>
+					</select>
+				 </div>
 				 <div class="bank-section-details">
 					<div class="form-group ">
 						<label>Akun Deposit: </label>				

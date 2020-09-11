@@ -86,6 +86,23 @@ class Crud_model extends CI_Model
         }
     }
 
+    // MP_Category
+    public function fetch_record_category($tablename, $args)
+    {
+        if ($args != NULL) {
+            $this->db->where(['status' => 0]);
+            $query = $this->db->get($tablename);
+        } else {
+            $query = $this->db->get($tablename);
+        }
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return NULL;
+        }
+    }
+
     public function fetch_record($tablename, $args)
     {
         if ($args != NULL) {
@@ -134,13 +151,16 @@ class Crud_model extends CI_Model
 
     public function fetch_record_by_id($tablename, $id)
     {
-        $this->db->where(['id' => $id]);
-        $query = $this->db->get($tablename);
-        if ($query->num_rows() > 0) {
-            return $query->result();
-        } else {
-            return NULL;
-        }
+        $this->db->where('id', $id);
+        return $this->db->get($tablename)->result();
+        // if ($query->num_rows() > 0)
+        // {
+        //     return $query->result();
+        // }
+        // else
+        // {
+        //     return NULL;
+        // }
     }
 
     //USED TO FETCH THE RECORD THROUGH PROVIDED ID AND ATTTRIBUTE NAME
@@ -289,12 +309,13 @@ class Crud_model extends CI_Model
 
     public function fetch_record_expense($date1, $date2)
     {
-        $this->db->select("mp_expense.*,mp_payee.customer_name, mp_head.name as head_name,mp_head.nature");
+        $this->db->select("mp_expense.*,mp_payee.customer_name, mp_category.category_name, mp_head.name as head_name,mp_head.nature");
         $this->db->where('mp_expense.date >=', $date1);
         $this->db->where('mp_expense.date <=', $date2);
         $this->db->from('mp_expense');
         $this->db->join('mp_head', "mp_expense.head_id = mp_head.id");
         $this->db->join('mp_payee', "mp_payee.id = mp_expense.payee_id");
+        $this->db->join('mp_category', "mp_expense.id_kategori = mp_category.id");
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->result();
@@ -590,13 +611,13 @@ class Crud_model extends CI_Model
         $this->db->from($table_name);
         return $this->db->count_all_results();
     }
-    public function count_sales_value($table_name, $first_date)
+    public function count_sum_sales($table_name, $first_date, $second_date)
     {
         $count = 0;
         $this->db->select("*");
         $this->db->from($table_name);
-        $this->db->where(['date' => $first_date]);
-
+        $this->db->where('date >=', $first_date);
+        $this->db->where('date <=', $second_date);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             $result =  $query->result();
@@ -607,11 +628,54 @@ class Crud_model extends CI_Model
             }
         }
         return  $count;
-
-        // $this->db->select("SELECT SUM(amount) AS total FROM $table_name WHERE date = $first_date", FALSE)->row();
-        // return $this->db->count_all_results();
     }
-
+    public function count_sum_expense($table_name, $first_date, $second_date)
+    {
+        $count = 0;
+        $this->db->select("*");
+        $this->db->from($table_name);
+        $this->db->where('date >=', $first_date);
+        $this->db->where('date <=', $second_date);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $result =  $query->result();
+            if ($result != NULL) {
+                foreach ($result as $single_head) {
+                    $count = $count + $single_head->total_paid;
+                }
+            }
+        }
+        return  $count;
+    }
+    public function saldo()
+    {
+        $income = 0;
+        $this->db->select("*");
+        $this->db->from('mp_customer_payments');
+        $query1 = $this->db->get();
+        if ($query1->num_rows() > 0) {
+            $result1 =  $query1->result();
+            if ($result1 != NULL) {
+                foreach ($result1 as $single_head1) {
+                    $income = $income + $single_head1->amount;
+                }
+            }
+        }
+        $expense = 0;
+        $this->db->select("*");
+        $this->db->from('mp_expense');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $result =  $query->result();
+            if ($result != NULL) {
+                foreach ($result as $single_head) {
+                    $expense = $expense + $single_head->total_paid;
+                }
+            }
+        }
+        $saldo =  $income - $expense;
+        return $saldo;
+    }
     public function count_expire_products($table_name, $first_date, $second_date)
     {
         $this->db->where('expire >=', $first_date);
@@ -654,7 +718,7 @@ class Crud_model extends CI_Model
     {
 
         $this->db->where('user_email =', $Email);
-        $this->db->where('user_password =', sha1($password));
+        $this->db->where('user_password =', md5($password));
         $this->db->where('status = 0');
         $query = $this->db->get('mp_users');
         if ($query->num_rows() > 0) {
@@ -667,7 +731,7 @@ class Crud_model extends CI_Model
     public function authenticate_panel_user($Email, $password)
     {
         $this->db->where('cus_email =', $Email);
-        $this->db->where('cus_password =', sha1($password));
+        $this->db->where('cus_password =', md5($password));
         $this->db->where('cus_status = 0');
         $this->db->where(['type' => 'customer']);
         $query = $this->db->get('mp_payee');

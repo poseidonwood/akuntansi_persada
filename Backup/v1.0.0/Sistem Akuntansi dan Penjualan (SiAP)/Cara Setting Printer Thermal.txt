@@ -1,0 +1,25 @@
+Setting di Control Panel
+
+1. Pastikan printer thermal sudah terkoneksi dengan baik dengan PC anda.
+2. Buka Control Panel > Device And Printer > Klik Kanan Pada Nama Printer Thermal > Printer Properties
+3. Pada Printer Properties pilih Tab Sharing > Ceklis pada Share This Printer. Kemudian catat nama Printernya
+4. Nama Printer inilah yang akan digunakan oleh Aplikasi SiAP.
+
+Setting di Aplikasi SiAP
+
+1. Login Ke Aplikasi SiAP
+2. Masuk ke menu Opsi Umum > Pengaturan Printer > Tambah Printer
+3. Nama Printer Isikan dengan Nama Printer sesuai setting Device and Printer
+4. Font Size isi sesuai kebutuhan, contoh : 9
+5. Simpan Printer
+6. Kembali ke daftar Printer. Klik Tindakan pada Printer > Jadikan Default
+7. Silahkan Tes Printer dengan Melakukan transaksi POS.
+8. Jika struk keluar otomatis, berarti setting printer berhasil
+
+Setting di Script
+
+Jika aplikasi sudah terkoneksi dengan Printer Thermal, Buka File :
+Application/controllers/Invoice.php
+
+Hapus kode pada baris : 589, 637, 720 dan 759
+Kemudian simpan kode

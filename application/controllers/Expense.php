@@ -36,6 +36,7 @@ class Expense extends CI_Controller
 			'Expense',
 			'Penerima Pembayaran',
 			'Metode',
+			'Kategori',
 			'Tanggal',
 			'Pengguna',
 			'Keterangan',
@@ -50,6 +51,7 @@ class Expense extends CI_Controller
 		$data['payee_list'] = $this->Crud_model->fetch_record('mp_payee',NULL);
 
 		// DEFINES GO TO MAIN FOLDER FOND INDEX.PHP  AND PASS THE ARRAY OF DATA TO THIS PAGE
+
 		$this->load->view('main/index.php', $data);
 	}
 
@@ -106,7 +108,8 @@ class Expense extends CI_Controller
 
 		if($page_name  == 'add_expense_model')
 		{
-			 
+			// Kategori
+			$data['kategori'] = $this->Crud_model->fetch_record_category('mp_category',NULL);
 			// DEFINES TO LOAD THE CATEGORY LIST FROM DATABSE TABLE mp_supplier
 			$data['head_list'] = $this->Crud_model->fetch_attr_record_by_id('mp_head','nature','Expense');
 			//DEFINE TO FETCH THE LIST OF SUPPLIER
@@ -129,6 +132,7 @@ class Expense extends CI_Controller
 		$added_by = $user_name['name'];
 
 		// DEFINES READ medicine details FORM medicine FORM
+		$kategori = html_escape($this->input->post('kategori'));
 		$head_id = html_escape($this->input->post('head_id'));
 		$method_id = html_escape($this->input->post('payment_id'));
 		$total_bill = html_escape($this->input->post('bill_total'));
@@ -166,7 +170,8 @@ class Expense extends CI_Controller
 				'payee_id' => $payee_id,
 				'bank_id' => $bank_id,
 				'credithead' => ($method_id == 'Cash' ? '2' : '16'),
-				'ref_no' => $ref_no
+				'ref_no' => $ref_no,
+				'id_kategori' => $kategori
 			);
 
 			// DEFINES CALL THE FUNCTION OF insert_data FORM Crud_model CLASS

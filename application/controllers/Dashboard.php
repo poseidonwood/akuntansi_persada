@@ -56,7 +56,7 @@ class Dashboard extends CI_Controller
 
 		//CASH IN HAND
 		// $data['cash_in_hand'] = $this->Statement_model->count_head_amount_by_id(2);
-		$data['cash_in_hand'] = $this->Statement_model->count_head_amount_by_id(2);
+		$data['cash_in_hand'] = $this->Crud_model->saldo();
 
 		//ACCOUNT RECEIVABLE
 		$data['account_recieveble'] = $this->Statement_model->count_head_amount_by_id(4);
@@ -94,7 +94,16 @@ class Dashboard extends CI_Controller
 		$data['currency'] = '( ' . $this->Crud_model->fetch_record_by_id('mp_langingpage', 1)[0]->currency . ' )';
 
 		$data['Sales_today_count'] = $this->Crud_model->count_sales('mp_customer_payments', date('Y-m-d'), date('Y-m-d'));
-		$data['Sales_month_count'] = $this->Crud_model->count_sales('mp_invoices', date('Y-m') . '-1', date('Y-m') . '-30');
+		$data['Sales_month_count'] = $this->Crud_model->count_sales('mp_customer_payments', date('Y-m') . '-1', date('Y-m') . '-30');
+
+		$data['Sales_sum_today_count'] = $this->Crud_model->count_sum_sales('mp_customer_payments', date('Y-m-d'), date('Y-m-d'));
+		$data['Sales_sum_month_count'] = $this->Crud_model->count_sum_sales('mp_customer_payments', date('Y-m') . '-1', date('Y-m') . '-30');
+
+		$data['Expense_today_count'] = $this->Crud_model->count_sales('mp_expense', date('Y-m-d'), date('Y-m-d'));
+		$data['Expense_month_count'] = $this->Crud_model->count_sales('mp_expense', date('Y-m') . '-1', date('Y-m') . '-30');
+
+		$data['Expense_sum_today_count'] = $this->Crud_model->count_sum_expense('mp_expense', date('Y-m-d'), date('Y-m-d'));
+		$data['Expense_sum_month_count'] = $this->Crud_model->count_sum_expense('mp_expense', date('Y-m') . '-1', date('Y-m') . '-30');
 
 		// COUNTING THE TODO LIST FOR THIS MONTH IN Todolist TABLE
 		$data['Todos_count'] = $this->Crud_model->count_sales('mp_todolist', date('Y-m') . '-1', date('Y-m') . '-30');
@@ -104,7 +113,7 @@ class Dashboard extends CI_Controller
 
 		$this->load->model('Accounts_model');
 		//COUNT AMOUNT OF SALES TODAY AND EXPENSE
-		$data['sales_today_amount'] =   $this->Crud_model->count_sales_value('mp_customer_payments', date('Y-m-d'));
+		$data['sales_today_amount'] =  $this->Accounts_model->Statistics_sales_with_date(date('Y-m-d'), date('Y-m-d'));
 
 		$data['sales_month_amount'] = $this->Accounts_model->Statistics_sales_with_date(date('Y-m' . '-1'), date('Y-m' . '-31'));
 

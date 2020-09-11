@@ -399,7 +399,8 @@ class Transaction_model extends CI_Model
             'date'           => $data_fields['date'],
             'description'    => $data_fields['description'],
             'user'           => $data_fields['user'],
-            'payee_id'       => $data_fields['payee_id']
+            'payee_id'       => $data_fields['payee_id'],
+            'id_kategori'       => $data_fields['id_kategori']
         );
 
         $this->db->insert('mp_expense',$args);
@@ -414,6 +415,7 @@ class Transaction_model extends CI_Model
             'method'              => $data_fields['method'],
             'cheque_amount'       =>  $data_fields['total_paid'],
             'ref_no'              => $data_fields['ref_no'],
+            'id_kategori'              => $data_fields['id_kategori'],
             'transaction_status'  => 1,
             'transaction_type'    => 'paid'
             );
@@ -488,7 +490,8 @@ class Transaction_model extends CI_Model
             'amount' =>      $data_fields['amount'],
             'method' =>      $data_fields['method'],
             'description' => $data_fields['description'],
-            'agentname' =>   $data_fields['agentname']
+            'agentname' =>   $data_fields['agentname'],
+            'id_kategori' =>   $data_fields['id_kategori']
         );
 
         if($data_fields['credithead'] == 16)
