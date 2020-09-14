@@ -138,4 +138,10 @@ class Dashboard extends CI_Controller
 		$this->session->unset_userdata('user_id');
 		redirect('/Login');
 	}
+	public function test()
+	{
+		$this->load->model('Accounts_model');
+		$result_sales_this_year_and_total_profit = $this->Accounts_model->statistics_sales_this_year();
+		$data['result_sales_arr'] = json_encode($result_sales_this_year_and_total_profit[0]);
+	}
 }

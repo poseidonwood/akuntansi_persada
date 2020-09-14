@@ -80,17 +80,17 @@
                                                 <?php echo $counter; ?>
                                             </td>
                                             <td>
-                                                <?php echo $single_expense->head_id; ?>
+                                                <?php echo $single_expense->head_name; ?>
                                             </td>
-                                            <!-- <td>
+                                            <td>
                                                 <?php echo $single_expense->customer_name; ?>
-                                            </td> -->
+                                            </td>
                                             <td>
                                                 <?php echo $single_expense->method; ?>
                                             </td>
-                                            <!-- <td>
+                                            <td>
                                                 <?php echo $single_expense->category_name; ?>
-                                            </td> -->
+                                            </td>
                                             <td>
                                                 <?php echo $single_expense->date; ?>
                                             </td>
@@ -113,7 +113,7 @@
                                     }
                                     ?>
                                     <tr>
-                                        <th colspan="6">Total</th>
+                                        <th colspan="7">Total</th>
                                         <th><?php echo $this->db->get_where('mp_langingpage', array('id' => 1))->result_array()[0]['currency']; ?> <?php echo number_format($total_bill, '2', '.', '') ?></th>
                                         <th><?php echo $this->db->get_where('mp_langingpage', array('id' => 1))->result_array()[0]['currency']; ?> <?php echo number_format($total_paid, '2', '.', '') ?></th>
                                     </tr>
@@ -121,7 +121,7 @@
                                 } else {
                                 ?>
                                     <tr class="text-center">
-                                        <td colspan="9"><b>Mohon maaf, Data Pengeluaran Kosong</b></td>
+                                        <td colspan="9"><b>Mohon maaf, tidak ditemukan data expense</b></td>
                                     </tr>
                                 <?php
                                 }

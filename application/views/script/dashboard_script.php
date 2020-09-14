@@ -65,7 +65,20 @@
                      pointStrokeColor: "#c1c7d1",
                      pointHighlightFill: "#fff",
                      pointHighlightStroke: "rgba(220,220,220,1)",
-                     data: <?php echo $result_sales_arr; ?>
+                     data: <?php
+                            $januari = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-01-01'), date('2020-01-31'));
+                            $februari = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-02-01'), date('2020-02-31'));
+                            $maret = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-03-01'), date('2020-03-31'));
+                            $april = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-04-01'), date('2020-04-31'));
+                            $mei = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-05-01'), date('2020-05-31'));
+                            $juni = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-06-01'), date('2020-06-31'));
+                            $juli = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-07-01'), date('2020-07-31'));
+                            $agustus = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-08-01'), date('2020-08-31'));
+                            $september = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-09-01'), date('2020-09-31'));
+                            $oktober = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-10-01'), date('2020-10-31'));
+                            $november = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-11-01'), date('2020-11-31'));
+                            $desember = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-12-01'), date('2020-12-31'));
+                            echo "['$januari','$februari','$maret','$april','$mei','$juni','$juli','$agustus','$september','$oktober','$november','$desember']"; ?>
                  }, {
                      label: "Expense Bulan Ini",
                      fillColor: "rgba(60,141,188,0.9)",
@@ -74,7 +87,20 @@
                      pointStrokeColor: "rgba(60,141,188,1)",
                      pointHighlightFill: "#fff",
                      pointHighlightStroke: "rgba(60,141,188,1)",
-                     data: <?php echo $result_expense_this_year; ?>
+                     data: <?php
+                            $januari = $this->Crud_model->count_sum_expense('mp_expense', date('2020-01-01'), date('2020-01-31'));
+                            $februari = $this->Crud_model->count_sum_expense('mp_expense', date('2020-02-01'), date('2020-02-31'));
+                            $maret = $this->Crud_model->count_sum_expense('mp_expense', date('2020-03-01'), date('2020-03-31'));
+                            $april = $this->Crud_model->count_sum_expense('mp_expense', date('2020-04-01'), date('2020-04-31'));
+                            $mei = $this->Crud_model->count_sum_expense('mp_expense', date('2020-05-01'), date('2020-05-31'));
+                            $juni = $this->Crud_model->count_sum_expense('mp_expense', date('2020-06-01'), date('2020-06-31'));
+                            $juli = $this->Crud_model->count_sum_expense('mp_expense', date('2020-07-01'), date('2020-07-31'));
+                            $agustus = $this->Crud_model->count_sum_expense('mp_expense', date('2020-08-01'), date('2020-08-31'));
+                            $september = $this->Crud_model->count_sum_expense('mp_expense', date('2020-09-01'), date('2020-09-31'));
+                            $oktober = $this->Crud_model->count_sum_expense('mp_expense', date('2020-10-01'), date('2020-10-31'));
+                            $november = $this->Crud_model->count_sum_expense('mp_expense', date('2020-11-01'), date('2020-11-31'));
+                            $desember = $this->Crud_model->count_sum_expense('mp_expense', date('2020-12-01'), date('2020-12-31'));
+                            echo "['$januari','$februari','$maret','$april','$mei','$juni','$juli','$agustus','$september','$oktober','$november','$desember']"; ?>
                  }
 
              ]
@@ -90,7 +116,48 @@
                  pointStrokeColor: "#c1c7d1",
                  pointHighlightFill: "#fff",
                  pointHighlightStroke: "rgba(220,220,220,1)",
-                 data: <?php echo $result_profit_this_year; ?>
+                 data: <?php
+                        //income
+                        $income_januari = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-01-01'), date('2020-01-31'));
+                        $income_februari = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-02-01'), date('2020-02-31'));
+                        $income_maret = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-03-01'), date('2020-03-31'));
+                        $income_april = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-04-01'), date('2020-04-31'));
+                        $income_mei = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-05-01'), date('2020-05-31'));
+                        $income_juni = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-06-01'), date('2020-06-31'));
+                        $income_juli = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-07-01'), date('2020-07-31'));
+                        $income_agustus = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-08-01'), date('2020-08-31'));
+                        $income_september = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-09-01'), date('2020-09-31'));
+                        $income_oktober = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-10-01'), date('2020-10-31'));
+                        $income_november = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-11-01'), date('2020-11-31'));
+                        $income_desember = $this->Crud_model->count_sum_sales('mp_customer_payments', date('2020-12-01'), date('2020-12-31'));
+
+                        //expense
+                        $expense_januari = $this->Crud_model->count_sum_expense('mp_expense', date('2020-01-01'), date('2020-01-31'));
+                        $expense_februari = $this->Crud_model->count_sum_expense('mp_expense', date('2020-02-01'), date('2020-02-31'));
+                        $expense_maret = $this->Crud_model->count_sum_expense('mp_expense', date('2020-03-01'), date('2020-03-31'));
+                        $expense_april = $this->Crud_model->count_sum_expense('mp_expense', date('2020-04-01'), date('2020-04-31'));
+                        $expense_mei = $this->Crud_model->count_sum_expense('mp_expense', date('2020-05-01'), date('2020-05-31'));
+                        $expense_juni = $this->Crud_model->count_sum_expense('mp_expense', date('2020-06-01'), date('2020-06-31'));
+                        $expense_juli = $this->Crud_model->count_sum_expense('mp_expense', date('2020-07-01'), date('2020-07-31'));
+                        $expense_agustus = $this->Crud_model->count_sum_expense('mp_expense', date('2020-08-01'), date('2020-08-31'));
+                        $expense_september = $this->Crud_model->count_sum_expense('mp_expense', date('2020-09-01'), date('2020-09-31'));
+                        $expense_oktober = $this->Crud_model->count_sum_expense('mp_expense', date('2020-10-01'), date('2020-10-31'));
+                        $expense_november = $this->Crud_model->count_sum_expense('mp_expense', date('2020-11-01'), date('2020-11-31'));
+                        $expense_desember = $this->Crud_model->count_sum_expense('mp_expense', date('2020-12-01'), date('2020-12-31'));
+                        //profit
+                        $januari = $income_januari - $expense_januari;
+                        $februari = $income_februari - $expense_februari;
+                        $maret = $income_maret - $expense_maret;
+                        $april = $income_april - $expense_april;
+                        $mei = $income_mei - $expense_mei;
+                        $juni = $income_juni - $expense_juni;
+                        $juli = $income_juli - $expense_juli;
+                        $agustus = $income_agustus - $expense_agustus;
+                        $september = $income_september - $expense_september;
+                        $oktober = $income_oktober - $expense_oktober;
+                        $november = $income_november - $expense_november;
+                        $desember = $income_desember - $expense_desember;
+                        echo "['$januari','$februari','$maret','$april','$mei','$juni','$juli','$agustus','$september','$oktober','$november','$desember']"; ?>
              }]
          };
 

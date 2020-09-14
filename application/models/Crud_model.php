@@ -309,13 +309,25 @@ class Crud_model extends CI_Model
 
     public function fetch_record_expense($date1, $date2)
     {
-        $this->db->select("mp_expense.*,mp_payee.customer_name, mp_category.category_name, mp_head.name as head_name,mp_head.nature");
+        // $this->db->select("mp_expense.*,mp_payee.customer_name, mp_category.category_name, mp_head.name as head_name,mp_head.nature");
+        $this->db->select("*");
         $this->db->where('mp_expense.date >=', $date1);
         $this->db->where('mp_expense.date <=', $date2);
         $this->db->from('mp_expense');
-        $this->db->join('mp_head', "mp_expense.head_id = mp_head.id");
+        // $this->db->join('mp_head', "mp_expense.head_id = mp_head.id");
         $this->db->join('mp_payee', "mp_payee.id = mp_expense.payee_id");
         $this->db->join('mp_category', "mp_expense.id_kategori = mp_category.id");
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return NULL;
+        }
+    }
+    public function fetch_record_expense_no_date()
+    {
+        $this->db->select("*");
+        $this->db->from('mp_expense');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->result();
